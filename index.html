@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="am" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>የባህር ዳር አየር መንገድ ታክሲ ማህበር | Bahir Dar Airport Taxi Association</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts for Ethiopic & Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0F172A',
+                            navy: '#1E3A8A',
+                            blue: '#2563EB',
+                            yellow: '#F59E0B',
+                            gold: '#EAB308',
+                            lightBg: '#F8FAFC',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans Ethiopic', 'Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans Ethiopic', 'Plus Jakarta Sans', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 58, 138, 0.78) 100%), 
+                        url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+        }
+
+        .custom-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dark-glass {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+
+        .gold-gradient-hover:hover {
+            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94A3B8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748B;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printableReceipt, #printableReceipt * {
+                visibility: visible;
+            }
+            #printableReceipt {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen overflow-x-hidden antialiased">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-brand-dark text-slate-300 text-xs sm:text-sm py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 container mx-auto">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-phone text-brand-yellow"></i> +251 58 220 0000 / +251 91 800 0000</span>
+                <span class="hidden md:inline-flex items-center gap-1.5"><i class="fa-solid fa-clock text-brand-yellow"></i> <span data-i18n="topbar_247">24/7 ዝግጁ አገልግሎት</span></span>
+            </div>
+            <div class="flex items-center gap-4 text-xs">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-brand-yellow"></i> <span data-i18n="topbar_location">ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ, ባህር ዳር</span></span>
+                <!-- Language Toggle Button -->
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-slate-800 hover:bg-slate-700 text-brand-yellow border border-amber-500/30 px-3 py-1 rounded-full flex items-center gap-1.5 font-semibold transition-all">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="currentLangLabel">English</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVIGATION BAR -->
+    <nav class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Title -->
+                <a href="#home" onclick="switchTab('home')" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center text-slate-950 font-bold text-2xl shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-taxi"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-base sm:text-lg text-white leading-tight" data-i18n="nav_title">የባህር ዳር አየር መንገድ ታክሲ ማህበር</div>
+                        <div class="text-xs text-amber-400 tracking-wider font-medium" data-i18n="nav_subtitle">Bahir Dar Airport Taxi Association</div>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden lg:flex items-center space-x-1 xl:space-x-2">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition-all text-amber-400 bg-slate-800/80" data-i18n="nav_home">መነሻ</button>
+                    <button onclick="switchTab('services')" id="nav-services" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm text-slate-300 hover:text-white hover:bg-slate-800 transition-all" data-i18n="nav_services">አገልግሎቶች</button>
+                    <button onclick="switchTab('pricing')" id="nav-pricing" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm text-slate-300 hover:text-white hover:bg-slate-800 transition-all" data-i18n="nav_pricing">ታሪፍ/ዋጋ</button>
+                    <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm text-slate-300 hover:text-white hover:bg-slate-800 transition-all" data-i18n="nav_about">ስለ እኛ</button>
+                    <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm text-slate-300 hover:text-white hover:bg-slate-800 transition-all" data-i18n="nav_contact">እኛን ያግኙን</button>
+                </div>
+
+                <!-- Call Button & Mobile Trigger -->
+                <div class="flex items-center gap-3">
+                    <a href="tel:+251918000000" class="hidden sm:inline-flex items-center gap-2 gold-gradient hover:opacity-95 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-sm shadow-md transition-all">
+                        <i class="fa-solid fa-phone-volume"></i>
+                        <span data-i18n="nav_call_now">አሁኑኑ ይደውሉ</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2.5 text-slate-300 hover:text-white focus:outline-none bg-slate-800 rounded-lg">
+                        <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-lg text-slate-200 hover:bg-slate-800 font-medium" data-i18n="nav_home">መነሻ</button>
+            <button onclick="switchTab('services'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-lg text-slate-200 hover:bg-slate-800 font-medium" data-i18n="nav_services">አገልግሎቶች</button>
+            <button onclick="switchTab('pricing'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-lg text-slate-200 hover:bg-slate-800 font-medium" data-i18n="nav_pricing">ታሪፍ/ዋጋ</button>
+            <button onclick="switchTab('about'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-lg text-slate-200 hover:bg-slate-800 font-medium" data-i18n="nav_about">ስለ እኛ</button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="block w-full text-left px-4 py-3 rounded-lg text-slate-200 hover:bg-slate-800 font-medium" data-i18n="nav_contact">እኛን ያግኙን</button>
+            
+            <div class="pt-2 border-t border-slate-800 flex gap-2">
+                <a href="tel:+251918000000" class="w-full text-center gold-gradient text-slate-950 font-bold py-3 rounded-xl shadow-md">
+                    <i class="fa-solid fa-phone me-2"></i> <span data-i18n="nav_call_now">አሁኑኑ ይደውሉ</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="flex-grow">
+
+        <!-- ==================== TAB 1: HOME PAGE ==================== -->
+        <section id="tab-home" class="page-tab">
+            <!-- Hero Section -->
+            <div class="hero-bg text-white py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Hero Info -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full backdrop-blur-md">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span data-i18n="hero_badge">የባህር ዳር ህጋዊና አስተማማኝ የታክሲ ማህበር</span>
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white" data-i18n="hero_title">
+                            ለአየር መንገድ እና ለተለያዩ መዳረሻዎች አስተማማኝ የታክሲ አገልግሎት
+                        </h1>
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-light" data-i18n="hero_subtitle">
+                            ከዳግማዊ ምኒልክ አውሮፕላን ማረፊያ ወደ ባህር ዳር ከተማ፣ ሆቴሎች፣ የጣና ገዳማትና የክልሉ ታዋቂ የቱሪስት መዳረሻዎች በሰላምና በምቾት ይጓዙ።
+                        </p>
+                        
+                        <!-- Quick Stats Badges -->
+                        <div class="pt-4 grid grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0">
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50 text-center">
+                                <div class="text-xl sm:text-2xl font-bold text-amber-400">100+</div>
+                                <div class="text-xs text-slate-300" data-i18n="stat_drivers">የተረጋገጡ አሽከርካሪዎች</div>
+                            </div>
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50 text-center">
+                                <div class="text-xl sm:text-2xl font-bold text-amber-400">24/7</div>
+                                <div class="text-xs text-slate-300" data-i18n="stat_support">የማይቋረጥ አገልግሎት</div>
+                            </div>
+                            <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50 text-center">
+                                <div class="text-xl sm:text-2xl font-bold text-amber-400">100%</div>
+                                <div class="text-xs text-slate-300" data-i18n="stat_safety">ደህንነቱ የተጠበቀ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Booking Form Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md">
+                            <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-800">
+                                <div>
+                                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                                        <i class="fa-solid fa-calendar-check text-amber-400"></i>
+                                        <span data-i18n="booking_form_title">ፈጣን ቦታ ማስያዣ</span>
+                                    </h2>
+                                    <p class="text-xs text-slate-400 mt-1" data-i18n="booking_form_sub">አሁኑኑ ይዘዙ፣ የታክሲ አሽከርካሪዎን እናዘጋጅ</p>
+                                </div>
+                                <span class="bg-amber-400/10 text-amber-400 text-xs font-semibold px-2.5 py-1 rounded-md border border-amber-400/20" data-i18n="instant_calc">ቅጽበታዊ ዋጋ</span>
+                            </div>
+
+                            <form id="quickBookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                                <!-- Pick up -->
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_pickup">መነሻ ቦታ</label>
+                                    <div class="relative">
+                                        <i class="fa-solid fa-location-dot absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                                        <select id="bookPickup" onchange="calculateFormFare()" required class="w-full bg-slate-800 border border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                                            <option value="airport" data-i18n="loc_airport">ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ</option>
+                                            <option value="kebele11" data-i18n="loc_kebele11">ቀበሌ 11 (ከተማ መሃል)</option>
+                                            <option value="kebele04" data-i18n="loc_kebele04">ቀበሌ 04 / ቀበሌ 13</option>
+                                            <option value="abaymado" data-i18n="loc_abaymado">አባይ ማዶ (ቀበሌ 14)</option>
+                                            <option value="tisabay" data-i18n="loc_tisabay">ጢስ አባይ ዘነበወርቅ</option>
+                                            <option value="gondar" data-i18n="loc_gondar">ጎንደር ከተማ</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Drop off -->
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_dropoff">መድረሻ ቦታ</label>
+                                    <div class="relative">
+                                        <i class="fa-solid fa-flag-checkered absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                                        <select id="bookDropoff" onchange="calculateFormFare()" required class="w-full bg-slate-800 border border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                                            <option value="kebele11" data-i18n="loc_kebele11">ቀበሌ 11 (ከተማ መሃል)</option>
+                                            <option value="airport" data-i18n="loc_airport">ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ</option>
+                                            <option value="kebele04" data-i18n="loc_kebele04">ቀበሌ 04 / ቀበሌ 13</option>
+                                            <option value="abaymado" data-i18n="loc_abaymado">አባይ ማዶ (ቀበሌ 14)</option>
+                                            <option value="tisabay" data-i18n="loc_tisabay">ጢስ አባይ ዘነበወርቅ</option>
+                                            <option value="gondar" data-i18n="loc_gondar">ጎንደር ከተማ</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Date & Time Grid -->
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_date">ቀን</label>
+                                        <input type="date" id="bookDate" required class="w-full bg-slate-800 border border-slate-700 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_time">ሰዓት</label>
+                                        <input type="time" id="bookTime" required class="w-full bg-slate-800 border border-slate-700 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                                    </div>
+                                </div>
+
+                                <!-- Vehicle & Passengers Grid -->
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_vehicle">የመኪና ዓይነት</label>
+                                        <select id="bookVehicle" onchange="calculateFormFare()" class="w-full bg-slate-800 border border-slate-700 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                                            <option value="standard" data-i18n="veh_standard">ስታንዳርድ ታክሲ (4 ሰዎችን)</option>
+                                            <option value="executive" data-i18n="veh_exec">ኤክስኪዩቲቭ/ኮምፎርት (4 ሰዎችን)</option>
+                                            <option value="minivan" data-i18n="veh_minivan">ሚኒቫን/ሚኒባስ (Up to 10)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_phone">ስልክ ቁጥር</label>
+                                        <input type="tel" id="bookPhone" placeholder="0911000000" required class="w-full bg-slate-800 border border-slate-700 rounded-xl py-2.5 px-3 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors">
+                                    </div>
+                                </div>
+
+                                <!-- Calculated Fare Display -->
+                                <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+                                    <span class="text-xs text-slate-400" data-i18n="est_fare">ግምታዊ የጉዞ ታሪፍ፡</span>
+                                    <span id="calculatedFareText" class="text-lg font-extrabold text-amber-400">500 ETB</span>
+                                </div>
+
+                                <button type="submit" class="w-full gold-gradient hover:opacity-95 text-slate-950 font-bold py-3.5 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span data-i18n="btn_confirm_booking">ቦታ አሁኑኑ ያስይዙ</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Why Choose Us Section -->
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900" data-i18n="why_title">ለምን እኛን ይመርጣሉ?</h2>
+                        <p class="text-slate-600 mt-2" data-i18n="why_sub">በአውሮፕላን ማረፊያ እና በከተማው አስተማማኝና ሰዓቱን የጠበቀ የትራንስፖርት ዋስትና እንሰጣለን።</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-xl mb-4 font-bold">
+                                <i class="fa-solid fa-user-check"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2" data-i18n="why_1_title">ልምድ ያላቸው አሽከርካሪዎች</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="why_1_desc">የሰለጠኑ፣ መንገድ ጠንቅቀው የሚያውቁ እና ተሳፋሪዎችን በስነ-ምግባር የሚያገለግሉ ባለሙያዎች።</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-xl mb-4 font-bold">
+                                <i class="fa-solid fa-clock font-bold"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2" data-i18n="why_2_title">ሰዓት አክባሪነት</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="why_2_desc">የበረራ ሰዓትዎን አያመልጡም። አስቀድመን በቦታው ተገኝተን እንጠብቅዎታለን።</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-xl mb-4 font-bold">
+                                <i class="fa-solid fa-hand-holding-dollar"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2" data-i18n="why_3_title">ተመጣጣኝና ግልጽ ዋጋ</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="why_3_desc">ያለ አላስፈላጊ ክፍያ በማህበሩ የተወሰነ የተረጋጋና ፍትሃዊ የታሪፍ ተመን።</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-xl mb-4 font-bold">
+                                <i class="fa-solid fa-shield-virus"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2" data-i18n="why_4_title">ፍጹም ደህንነት</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="why_4_desc">በየጊዜው የቴክኒክ ምርመራ የተደረገላቸው ንጹህ እና ምቹ ተሽከርካሪዎች።</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Overview of Destinations Showcase -->
+            <div class="py-16 bg-slate-100 border-y border-slate-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-600" data-i18n="dest_tag">ታዋቂ መዳረሻዎች</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1" data-i18n="dest_title">በባህር ዳር እና አካባቢዋ ያሉ ዋና የጉዞ መስመሮች</h2>
+                        </div>
+                        <button onclick="switchTab('services')" class="mt-4 md:mt-0 text-brand-navy font-bold hover:text-amber-600 text-sm flex items-center gap-1">
+                            <span data-i18n="view_all_services">ሁሉንም አገልግሎቶች ይመልከቱ</span> <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Dest 1 -->
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=600&auto=format&fit=crop" alt="Airport Transfer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-3 right-3 bg-slate-900/80 text-amber-400 text-xs font-bold px-3 py-1 rounded-full" data-i18n="tag_popular">ተመራጭ</span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-slate-900 text-lg" data-i18n="serv_1_title">የአየር መንገድ ትራንስፖርት</h3>
+                                <p class="text-slate-600 text-xs mt-2" data-i18n="serv_1_short">ከዳግማዊ ምኒልክ አውሮፕላን ማረፊያ ወደ ከተማው ማናቸውም ሆቴሎችና መኖሪያዎች።</p>
+                                <div class="mt-4 flex justify-between items-center pt-3 border-t border-slate-100">
+                                    <span class="text-sm font-extrabold text-amber-600">ከ 400 ETB ጀምሮ</span>
+                                    <button onclick="quickBookPreset('airport', 'kebele11')" class="bg-slate-900 text-white hover:bg-amber-500 hover:text-slate-950 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors" data-i18n="btn_book_now">አሁኑኑ ይዘዙ</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dest 2 -->
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop" alt="Tis Abay Trip" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-slate-900 text-lg" data-i18n="serv_2_title">የጢስ አባይ ፏፏቴ ጉዞ</h3>
+                                <p class="text-slate-600 text-xs mt-2" data-i18n="serv_2_short">ወደ ታላቁ አባይ ፏፏቴ ለሽርሽርና ለጉብኝት የሚደረጉ ምቹ የታክሲ ጉዞዎች።</p>
+                                <div class="mt-4 flex justify-between items-center pt-3 border-t border-slate-100">
+                                    <span class="text-sm font-extrabold text-amber-600">ግምታዊ 1,500 ETB</span>
+                                    <button onclick="quickBookPreset('kebele11', 'tisabay')" class="bg-slate-900 text-white hover:bg-amber-500 hover:text-slate-950 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors" data-i18n="btn_book_now">አሁኑኑ ይዘዙ</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dest 3 -->
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=600&auto=format&fit=crop" alt="Gondar Trip" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-slate-900 text-lg" data-i18n="serv_3_title">የረጅም መንገድ (ባህር ዳር - ጎንደር)</h3>
+                                <p class="text-slate-600 text-xs mt-2" data-i18n="serv_3_short">ከባህር ዳር ወደ ጎንደር፣ ታሪካዊ ቦታዎች እና ጎረቤት ዞኖች የሚደረጉ የግል ጉዞዎች።</p>
+                                <div class="mt-4 flex justify-between items-center pt-3 border-t border-slate-100">
+                                    <span class="text-sm font-extrabold text-amber-600">ግምታዊ 3,800 ETB</span>
+                                    <button onclick="quickBookPreset('kebele11', 'gondar')" class="bg-slate-900 text-white hover:bg-amber-500 hover:text-slate-950 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors" data-i18n="btn_book_now">አሁኑኑ ይዘዙ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 2: SERVICES PAGE ==================== -->
+        <section id="tab-services" class="page-tab hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600" data-i18n="services_tag">የማህበሩ አገልግሎቶች</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="services_page_title">የምንሰጣቸው ጥራት ያላቸው የትራንስፖርት አገልግሎቶች</h1>
+                <p class="text-slate-600 mt-3 text-sm sm:text-base" data-i18n="services_page_sub">ለግል፣ ለቡድን እና ለድርጅቶች ፍላጎት የተዘጋጁ ዘመናዊ የታክሲ አገልግሎት አማራጮቻችን።</p>
+            </div>
+
+            <!-- Detailed Services List -->
+            <div class="space-y-8">
+                <!-- Service Item 1 -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/3 h-56 rounded-xl overflow-hidden relative flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent flex items-end p-4">
+                            <span class="bg-amber-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full" data-i18n="serv_badge_247">24/7 ይገኛል</span>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3 space-y-3">
+                        <div class="flex items-center gap-2 text-amber-600 font-semibold text-sm">
+                            <i class="fa-solid fa-plane-arrival"></i>
+                            <span data-i18n="s1_category">አየር መንገድ ትራንስፖርት</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900" data-i18n="s1_title">ከ/ወደ ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ (Bahir Dar Airport Transfer)</h2>
+                        <p class="text-slate-600 text-sm leading-relaxed" data-i18n="s1_desc">
+                            የበረራ ሰዓትዎን በማንኛውም ጊዜ ጠብቀን አውሮፕላን ማረፊያ እናደርሳለን፤ ወይም ከበረራ ሲወርዱ በስምዎ ሰሌዳ ይዘን እንቀበልዎታለን። ለሁሉም የባህር ዳር ሆቴሎችና ሎጆች ምቹ የትራንስፖርት አገልግሎት።
+                        </p>
+                        <ul class="text-xs text-slate-700 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s1_f1">የበረራ ሰዓት ክትትል</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s1_f2">የእቃ ድጋፍና እንክብካቤ</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s1_f3">ቀጥታ ወደ ሆቴል ማድረስ</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s1_f4">የተወሰነና ፍትሃዊ ዋጋ</span></li>
+                        </ul>
+                        <div class="pt-3">
+                            <button onclick="quickBookPreset('airport', 'kebele11')" class="gold-gradient text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm shadow hover:opacity-95 transition-all">
+                                <span data-i18n="btn_book_this">ይህንን አገልግሎት ያስይዙ</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Item 2 -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/3 h-56 rounded-xl overflow-hidden relative flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent flex items-end p-4">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full" data-i18n="serv_badge_tour">ቱሪዝም & ጉብኝት</span>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3 space-y-3">
+                        <div class="flex items-center gap-2 text-blue-600 font-semibold text-sm">
+                            <i class="fa-solid fa-compass"></i>
+                            <span data-i18n="s2_category">የግልና የቡድን ቱር</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900" data-i18n="s2_title">የቱሪስት ቦታዎችና የሽርሽር ጉዞዎች (Private & Sightseeing Tours)</h2>
+                        <p class="text-slate-600 text-sm leading-relaxed" data-i18n="s2_desc">
+                            ወደ ጣና ሃይቅ ወደቦች፣ ወደ ጢስ አባይ ፏፏቴ፣ ወደ ጎንደር አዘዞ እንዲሁም በአቅራቢያ ያሉ ታሪካዊና ተፈጥሯዊ ቦታዎች የሚደረጉ የሙሉ ቀን ወይም የግማሽ ቀን የታክሲ አገልግሎቶች።
+                        </p>
+                        <ul class="text-xs text-slate-700 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s2_f1">ወደ ጣና ወደብ ማድረስ</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s2_f2">ወደ ጢስ አባይ የጉዞ ውል</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s2_f3">የሙሉ ቀን ተጠባባቂ ታክሲ</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s2_f4">ለቡድኖች የሚሆን ሚኒቫን</span></li>
+                        </ul>
+                        <div class="pt-3">
+                            <button onclick="quickBookPreset('kebele11', 'tisabay')" class="gold-gradient text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm shadow hover:opacity-95 transition-all">
+                                <span data-i18n="btn_book_this">ይህንን አገልግሎት ያስይዙ</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Item 3 -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/3 h-56 rounded-xl overflow-hidden relative flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent flex items-end p-4">
+                            <span class="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full" data-i18n="serv_badge_corp">ኮርፖሬት</span>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3 space-y-3">
+                        <div class="flex items-center gap-2 text-purple-600 font-semibold text-sm">
+                            <i class="fa-solid fa-building"></i>
+                            <span data-i18n="s3_category">የድርጅት ውል</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900" data-i18n="s3_title">የኮርፖሬት እና የድርጅቶች ትራንስፖርት (Corporate Services)</h2>
+                        <p class="text-slate-600 text-sm leading-relaxed" data-i18n="s3_desc">
+                            ለንግድ ድርጅቶች፣ ለበጎ አድራጎት ተቋማትና ለመንግስታዊ ያልሆኑ ድርጅቶች (NGOs) ሰራተኞችና እንግዶች የሚሆን የወርሀዊ ወይም የፕሮጀክት ውል የትራንስፖርት ስምምነት።
+                        </p>
+                        <ul class="text-xs text-slate-700 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s3_f1">በወርሃዊ ደረሰኝ ክፍያ</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s3_f2">ልዩ የደንበኞች ድጋፍ</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s3_f3">የቅድሚያ ቦታ ማስያዝ</span></li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500"></i> <span data-i18n="s3_f4">ህጋዊ ደረሰኞችና ውል</span></li>
+                        </ul>
+                        <div class="pt-3">
+                            <button onclick="switchTab('contact')" class="bg-slate-900 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow hover:bg-slate-800 transition-all">
+                                <span data-i18n="btn_contact_corp">ለድርጅት ውል ያነጋግሩን</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 3: PRICING & ROUTES PAGE ==================== -->
+        <section id="tab-pricing" class="page-tab hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600" data-i18n="pricing_tag">የታሪፍ ዝርዝር</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="pricing_title">ግልጽና ፍትሃዊ የጉዞ ዋጋዎች</h1>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base" data-i18n="pricing_sub">በማህበሩ የተወሰኑ ይፋዊ የጉዞ ታሪፎችን ይመልከቱ ወይም በካስኩሌተሩ አስልተው ይረዱ።</p>
+            </div>
+
+            <!-- Interactive Fare Calculator Card -->
+            <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl mb-12 border border-slate-800">
+                <h2 class="text-xl font-bold mb-4 text-amber-400 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span data-i18n="calc_header">የቀጥታ ዋጋ ስሌት (Live Distance & Fare Calculator)</span>
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_pickup">መነሻ ቦታ</label>
+                        <select id="calcFrom" onchange="calculateInteractiveFare()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="airport" data-i18n="loc_airport">ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ</option>
+                            <option value="kebele11" data-i18n="loc_kebele11">ቀበሌ 11 (ከተማ መሃል)</option>
+                            <option value="kebele04" data-i18n="loc_kebele04">ቀበሌ 04 / ቀበሌ 13</option>
+                            <option value="abaymado" data-i18n="loc_abaymado">አባይ ማዶ (ቀበሌ 14)</option>
+                            <option value="tisabay" data-i18n="loc_tisabay">ጢስ አባይ ዘነበወርቅ</option>
+                            <option value="gondar" data-i18n="loc_gondar">ጎንደር ከተማ</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_dropoff">መድረሻ ቦታ</label>
+                        <select id="calcTo" onchange="calculateInteractiveFare()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="kebele11" selected data-i18n="loc_kebele11">ቀበሌ 11 (ከተማ መሃል)</option>
+                            <option value="airport" data-i18n="loc_airport">ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ</option>
+                            <option value="kebele04" data-i18n="loc_kebele04">ቀበሌ 04 / ቀበሌ 13</option>
+                            <option value="abaymado" data-i18n="loc_abaymado">አባይ ማዶ (ቀበሌ 14)</option>
+                            <option value="tisabay" data-i18n="loc_tisabay">ጢስ አባይ ዘነበወርቅ</option>
+                            <option value="gondar" data-i18n="loc_gondar">ጎንደር ከተማ</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_vehicle">የመኪና ዓይነት</label>
+                        <select id="calcVeh" onchange="calculateInteractiveFare()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="standard" data-i18n="veh_standard">ስታንዳርድ ታክሲ</option>
+                            <option value="executive" data-i18n="veh_exec">ኤክስኪዩቲቭ/ኮምፎርት</option>
+                            <option value="minivan" data-i18n="veh_minivan">ሚኒቫን/ሚኒባስ</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Calc Result Output Box -->
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400" data-i18n="calc_est_dist">ግምታዊ ርቀት: <span id="distVal" class="text-white font-bold">11 km</span></div>
+                            <div class="text-xs text-slate-400" data-i18n="calc_est_time">ግምታዊ የጊዜ ርዝማኔ: <span id="timeVal" class="text-white font-bold">18-22 ደቂቃ</span></div>
+                        </div>
+                    </div>
+                    <div class="text-right flex items-center gap-4">
+                        <div>
+                            <div class="text-xs text-slate-400" data-i18n="total_est_price">ጠቅላላ የታሪፍ ተመን</div>
+                            <div id="calcFareResult" class="text-2xl sm:text-3xl font-extrabold text-amber-400">500 ETB</div>
+                        </div>
+                        <button onclick="applyCalcToBooking()" class="gold-gradient text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm shadow hover:opacity-95 transition-all">
+                            <span data-i18n="btn_book_this_route">በዚህ ታሪፍ አስይዝ</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Routes Table with Search Filter -->
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                <div class="p-4 sm:p-6 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <h3 class="font-bold text-slate-900 text-lg" data-i18n="table_header">የመደበኛ የጉዞ መስመሮች ዋጋ ሰንጠረዥ</h3>
+                    <div class="relative w-full sm:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-sm"></i>
+                        <input type="text" id="routeSearch" onkeyup="filterRoutesTable()" placeholder="መስመር ይፈልጉ..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600" id="routesTable">
+                        <thead class="bg-slate-50 text-slate-800 text-xs uppercase font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-4" data-i18n="th_route">የጉዞ መስመር (መነሻ - መድረሻ)</th>
+                                <th class="p-4" data-i18n="th_distance">ርቀት</th>
+                                <th class="p-4" data-i18n="th_std_price">ስታንዳርድ ታክሲ</th>
+                                <th class="p-4" data-i18n="th_exec_price">ኤክስኪዩቲቭ</th>
+                                <th class="p-4" data-i18n="th_action">ተግባር</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-semibold text-slate-900">አውሮፕላን ማረፊያ <i class="fa-solid fa-arrow-right text-xs text-slate-400 mx-1"></i> ቀበሌ 11 (ከተማ መሃል)</td>
+                                <td class="p-4">11 km</td>
+                                <td class="p-4 text-emerald-600 font-bold">500 ETB</td>
+                                <td class="p-4 text-slate-800 font-semibold">750 ETB</td>
+                                <td class="p-4"><button onclick="quickBookPreset('airport', 'kebele11')" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-amber-500 hover:text-slate-950 font-semibold" data-i18n="btn_book">አስይዝ</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-semibold text-slate-900">አውሮፕላን ማረፊያ <i class="fa-solid fa-arrow-right text-xs text-slate-400 mx-1"></i> ቀበሌ 04 / ቀበሌ 13</td>
+                                <td class="p-4">8 km</td>
+                                <td class="p-4 text-emerald-600 font-bold">400 ETB</td>
+                                <td class="p-4 text-slate-800 font-semibold">600 ETB</td>
+                                <td class="p-4"><button onclick="quickBookPreset('airport', 'kebele04')" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-amber-500 hover:text-slate-950 font-semibold" data-i18n="btn_book">አስይዝ</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-semibold text-slate-900">አውሮፕላን ማረፊያ <i class="fa-solid fa-arrow-right text-xs text-slate-400 mx-1"></i> አባይ ማዶ (ቀበሌ 14)</td>
+                                <td class="p-4">15 km</td>
+                                <td class="p-4 text-emerald-600 font-bold">650 ETB</td>
+                                <td class="p-4 text-slate-800 font-semibold">950 ETB</td>
+                                <td class="p-4"><button onclick="quickBookPreset('airport', 'abaymado')" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-amber-500 hover:text-slate-950 font-semibold" data-i18n="btn_book">አስይዝ</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-semibold text-slate-900">ባህር ዳር ከተማ <i class="fa-solid fa-arrow-right text-xs text-slate-400 mx-1"></i> ጢስ አባይ ፏፏቴ</td>
+                                <td class="p-4">32 km</td>
+                                <td class="p-4 text-emerald-600 font-bold">1,500 ETB</td>
+                                <td class="p-4 text-slate-800 font-semibold">2,200 ETB</td>
+                                <td class="p-4"><button onclick="quickBookPreset('kebele11', 'tisabay')" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-amber-500 hover:text-slate-950 font-semibold" data-i18n="btn_book">አስይዝ</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-semibold text-slate-900">ባህር ዳር ከተማ <i class="fa-solid fa-arrow-right text-xs text-slate-400 mx-1"></i> ጎንደር ከተማ</td>
+                                <td class="p-4">175 km</td>
+                                <td class="p-4 text-emerald-600 font-bold">3,800 ETB</td>
+                                <td class="p-4 text-slate-800 font-semibold">5,200 ETB</td>
+                                <td class="p-4"><button onclick="quickBookPreset('kebele11', 'gondar')" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-amber-500 hover:text-slate-950 font-semibold" data-i18n="btn_book">አስይዝ</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 4: ABOUT US PAGE ==================== -->
+        <section id="tab-about" class="page-tab hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600" data-i18n="about_tag">ስለ ማህበራችን</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="about_title">የባህር ዳር አየር መንገድ ታክሲ ማህበር</h1>
+                <p class="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed" data-i18n="about_sub">በባህር ዳር ከተማና በዳግማዊ ምኒልክ አውሮፕላን ማረፊያ የትራንስፖርት ዘርፉን በዘመናዊ መንገድ ለማደራጀትና የነጋዴዎችን፣ የቱሪስቶችንና የህብረተሰቡን እንግልት ለማስቀረት የተቋቋመ ህጋዊ ማህበር።</p>
+            </div>
+
+            <!-- Story & Vision Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-history"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900" data-i18n="about_story_title">የማህበሩ ታሪክና አመሰራረት</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-i18n="about_story_desc">
+                        ማህበራችን በባህር ዳር ከተማ ከጊዜ ወደ ጊዜ እየጨመረ የመጣውን የአየር መንገድ ተጓዦች ፍላጎት መሰረት በማድረግ የተቋቋመ ነው። ከ100 በላይ አባላት አሽከርካሪዎችን በማቀፍ የተደራጀው ማህበራችን ደንበኞችን በሰላም፣ በምቾትና በሰዓት ማድረስን ቀዳሚ ተልዕኮው አድርጎ ይሰራል።
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900" data-i18n="about_vision_title">ራዕይ እና ተልዕኮ</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-i18n="about_vision_desc">
+                        **ራዕያችን፡** በኢትዮጵያ ቀዳሚና በቴክኖሎጂ የተደገፈ ጥራት ያለው የአውሮፕላን ማረፊያ የታክሲ አገልግሎት ሰጪ ማህበር መሆን።<br>
+                        **ተልዕኮ፡** ተሳፋሪዎችን በታማኝነት፣ በፈጣን ምላሽና በተመጣጣኝ ዋጋ ማገልገል እንዲሁም የባህር ዳርን የቱሪዝም ገጽታ ማሳደግ።
+                    </p>
+                </div>
+            </div>
+
+            <!-- Safety Policy Box -->
+            <div class="bg-slate-900 text-white p-8 rounded-2xl shadow-xl mb-16 relative overflow-hidden">
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="md:col-span-2 space-y-3">
+                        <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30" data-i18n="about_safety_badge">የደህንነት ዋስትና</span>
+                        <h3 class="text-2xl font-bold" data-i18n="about_safety_title">የደህንነትና የጥራት ፖሊሲያችን</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed" data-i18n="about_safety_desc">
+                            ሁሉም አሽከርካሪዎቻችን ከፖሊስ የጸዳ የመልካም ስነ-ምግባር ማስረጃ ያላቸው፣ በመንገድ ደህንነት የሰለጠኑ እና ተሽከርካሪዎቻቸው በየጊዜው የቴክኒክ ምርመራ የሚያልፉ ናቸው።
+                        </p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <div class="inline-block p-4 rounded-2xl bg-slate-800 border border-slate-700">
+                            <i class="fa-solid fa-award text-4xl text-amber-400 mb-2"></i>
+                            <div class="text-xs font-bold text-slate-200" data-i18n="certified_badge">100% ህጋዊና የተረጋገጠ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Showcase Counters -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-amber-500">50,000+</div>
+                    <div class="text-xs text-slate-600 font-semibold mt-2" data-i18n="stat_c1">የተገለገሉ ተሳፋሪዎች</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-brand-navy">100+</div>
+                    <div class="text-xs text-slate-600 font-semibold mt-2" data-i18n="stat_c2">የተደራጁ ታክሲዎች</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-emerald-500">100%</div>
+                    <div class="text-xs text-slate-600 font-semibold mt-2" data-i18n="stat_c3">የሰዓት አክባሪነት መጠን</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-purple-600">24/7</div>
+                    <div class="text-xs text-slate-600 font-semibold mt-2" data-i18n="stat_c4">የስልክና የኦንላይን ድጋፍ</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 5: CONTACT US PAGE ==================== -->
+        <section id="tab-contact" class="page-tab hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600" data-i18n="contact_tag">የመገኛ አድራሻ</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="contact_title">እኛን ያግኙን</h1>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base" data-i18n="contact_sub">ለማንኛውም ጥያቄ፣ አስተያየት ወይም ቅድመ ቦታ ማስያዣ በማንኛውም ጊዜ ይደውሉልን ወይም መልዕክት ይላኩልን።</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Contact Information & Quick Action Buttons -->
+                <div class="lg:col-span-5 space-y-6">
+                    
+                    <!-- Direct Action Buttons -->
+                    <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-md space-y-4">
+                        <h3 class="font-bold text-lg text-amber-400" data-i18n="fast_connect">በፍጥነት ይገናኙን</h3>
+                        
+                        <!-- Phone Call -->
+                        <a href="tel:+251918000000" class="flex items-center gap-4 p-3 rounded-xl bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700">
+                            <div class="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center text-slate-950 text-lg font-bold">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400" data-i18n="contact_call_label">የ24/7 የስልክ መስመር</div>
+                                <div class="font-bold text-sm text-white">+251 91 800 0000</div>
+                            </div>
+                        </a>
+
+                        <!-- Telegram -->
+                        <a href="https://t.me/" target="_blank" class="flex items-center gap-4 p-3 rounded-xl bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700">
+                            <div class="w-10 h-10 rounded-lg bg-sky-500 text-white flex items-center justify-center text-lg font-bold">
+                                <i class="fa-brands fa-telegram"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400" data-i18n="contact_telegram">የቴሌግራም ቻናል / ቦት</div>
+                                <div class="font-bold text-sm text-white">@BahirDarAirportTaxi</div>
+                            </div>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/251918000000" target="_blank" class="flex items-center gap-4 p-3 rounded-xl bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500 text-white flex items-center justify-center text-lg font-bold">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400" data-i18n="contact_whatsapp">የዋትስአፕ መልዕክት</div>
+                                <div class="font-bold text-sm text-white">+251 91 800 0000</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Office Address Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <h3 class="font-bold text-lg text-slate-900" data-i18n="office_address_title">የቢሮ አድራሻ</h3>
+                        
+                        <div class="flex items-start gap-3 text-sm text-slate-600">
+                            <i class="fa-solid fa-location-dot text-amber-500 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 block" data-i18n="off_loc_1">ዋና ቢሮ (አውሮፕላን ማረፊያ):</strong>
+                                <span data-i18n="off_loc_1_desc">ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ ቅጽር ግቢ፣ ባህር ዳር</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 text-sm text-slate-600">
+                            <i class="fa-solid fa-building text-amber-500 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 block" data-i18n="off_loc_2">የከተማ ውስጥ ቅርንጫፍ:</strong>
+                                <span data-i18n="off_loc_2_desc">ቀበሌ 11, ከጊዮን ሆቴል አቅራቢያ, ባህር ዳር</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 text-sm text-slate-600">
+                            <i class="fa-solid fa-envelope text-amber-500 mt-1"></i>
+                            <div>
+                                <strong class="text-slate-900 block" data-i18n="off_email">ኢሜይል:</strong>
+                                <span>info@bahirdarairporttaxi.et</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Interactive Form -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="contact_form_header">መልዕክት ይላኩልን</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm mb-6" data-i18n="contact_form_sub">አስተያየት፣ ጥያቄ ወይም የልዩ ጉዞ ጥያቄ ካለዎት ቅጹን ይሙሉ፤ በፍጥነት እንመልሳለን።</p>
+
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1" data-i18n="c_name">ሙሉ ስም</label>
+                                    <input type="text" required placeholder="አበበ በቀለ" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1" data-i18n="c_phone">ስልክ ቁጥር</label>
+                                    <input type="tel" required placeholder="0911..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1" data-i18n="c_email">ኢሜይል (አማራጭ)</label>
+                                <input type="email" placeholder="example@gmail.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1" data-i18n="c_msg">መልዕክት</label>
+                                <textarea rows="4" required placeholder="መልዕክትዎን እዚህ ይጻፉ..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:border-amber-500"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-6 rounded-xl shadow transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane text-amber-400"></i>
+                                <span data-i18n="btn_send_msg">መልዕክት ላክ</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Map Overview Representation -->
+                    <div class="mt-6 bg-slate-200 rounded-2xl overflow-hidden h-48 border border-slate-300 relative flex items-center justify-center">
+                        <div class="text-center p-4 bg-white/90 rounded-xl backdrop-blur-sm shadow border border-slate-200">
+                            <i class="fa-solid fa-map-location-dot text-amber-500 text-2xl mb-1"></i>
+                            <div class="font-bold text-xs text-slate-900" data-i18n="map_label">ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ, ባህር ዳር</div>
+                            <div class="text-[10px] text-slate-500">Bahir Dar, Ethiopia</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 pt-12 pb-6 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <!-- Col 1 -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 text-white font-bold text-base">
+                    <div class="w-8 h-8 rounded-lg gold-gradient flex items-center justify-center text-slate-950 text-sm">
+                        <i class="fa-solid fa-taxi"></i>
+                    </div>
+                    <span data-i18n="nav_title">የባህር ዳር አየር መንገድ ታክሲ ማህበር</span>
+                </div>
+                <p class="text-slate-400 leading-relaxed" data-i18n="footer_about">
+                    በባህር ዳር አውሮፕላን ማረፊያ እና አካባቢዋ ፈጣን፣ ደህንነቱ የተጠበቀ እና ሰዓት አክባሪ የታክሲ አገልግሎት ሰጪ ማህበር።
+                </p>
+            </div>
+
+            <!-- Col 2 -->
+            <div>
+                <h4 class="text-white font-bold mb-3 text-sm" data-i18n="footer_quick_links">ፈጣን አገናኞች</h4>
+                <ul class="space-y-2">
+                    <li><button onclick="switchTab('home')" class="hover:text-amber-400 transition-colors" data-i18n="nav_home">መነሻ</button></li>
+                    <li><button onclick="switchTab('services')" class="hover:text-amber-400 transition-colors" data-i18n="nav_services">አገልግሎቶች</button></li>
+                    <li><button onclick="switchTab('pricing')" class="hover:text-amber-400 transition-colors" data-i18n="nav_pricing">ታሪፍ/ዋጋ</button></li>
+                    <li><button onclick="switchTab('about')" class="hover:text-amber-400 transition-colors" data-i18n="nav_about">ስለ እኛ</button></li>
+                </ul>
+            </div>
+
+            <!-- Col 3 -->
+            <div>
+                <h4 class="text-white font-bold mb-3 text-sm" data-i18n="footer_services">አገልግሎቶቻችን</h4>
+                <ul class="space-y-2">
+                    <li data-i18n="s1_category">የአየር መንገድ ትራንስፖርት</li>
+                    <li data-i18n="s2_category">የግልና የቡድን ቱር</li>
+                    <li data-i18n="s3_category">የድርጅት ውል</li>
+                    <li data-i18n="loc_tisabay">የጢስ አባይ ጉዞ</li>
+                </ul>
+            </div>
+
+            <!-- Col 4 -->
+            <div>
+                <h4 class="text-white font-bold mb-3 text-sm" data-i18n="footer_contact">አድራሻ</h4>
+                <p class="mb-2"><i class="fa-solid fa-phone text-amber-400 me-2"></i> +251 91 800 0000</p>
+                <p class="mb-2"><i class="fa-solid fa-location-dot text-amber-400 me-2"></i> ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ</p>
+                <div class="flex gap-3 mt-4 text-base">
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-amber-500 hover:text-slate-950 transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-amber-500 hover:text-slate-950 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-amber-500 hover:text-slate-950 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 border-t border-slate-800/80 pt-6 text-center text-slate-500">
+            <p>© 2026 የባህር ዳር አየር መንገድ ታክሲ ማህበር (Bahir Dar Airport Taxi Association)። መብቱ በህግ የተጠበቀ ነው።</p>
+        </div>
+    </footer>
+
+    <!-- BOOKING RECEIPT CONFIRMATION MODAL -->
+    <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative animate-fade-in" id="printableReceipt">
+            
+            <!-- Close Modal Button -->
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Receipt Content Header -->
+            <div class="text-center pb-4 border-b border-slate-200">
+                <div class="w-12 h-12 rounded-full gold-gradient mx-auto flex items-center justify-center text-slate-950 text-xl font-bold mb-2">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900" data-i18n="modal_receipt_title">የቦታ ማስያዣ ማረጋገጫ</h3>
+                <p class="text-xs text-slate-500" data-i18n="modal_receipt_sub">የባህር ዳር አየር መንገድ ታክሲ ማህበር</p>
+            </div>
+
+            <!-- Dynamic Receipt Details -->
+            <div class="py-4 space-y-2.5 text-xs">
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span class="text-slate-500" data-i18n="receipt_code">የቦታ ማስያዣ ኮድ፡</span>
+                    <span id="recCode" class="font-bold text-slate-900">BDTA-8921</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span class="text-slate-500" data-i18n="label_pickup">መነሻ ቦታ፡</span>
+                    <span id="recPickup" class="font-semibold text-slate-800">አውሮፕላን ማረፊያ</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span class="text-slate-500" data-i18n="label_dropoff">መድረሻ ቦታ፡</span>
+                    <span id="recDropoff" class="font-semibold text-slate-800">ቀበሌ 11</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span class="text-slate-500" data-i18n="label_date">ቀንና ሰዓት፡</span>
+                    <span id="recDateTime" class="font-semibold text-slate-800">2026-10-28 | 10:00 AM</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span class="text-slate-500" data-i18n="label_vehicle">የመኪና ዓይነት፡</span>
+                    <span id="recVehicle" class="font-semibold text-slate-800">ስታንዳርድ</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span class="text-slate-500" data-i18n="label_phone">ተላኪ ስልክ፡</span>
+                    <span id="recPhone" class="font-semibold text-slate-800">0911000000</span>
+                </div>
+                <div class="flex justify-between py-2 bg-amber-50 px-3 rounded-lg border border-amber-200 mt-2">
+                    <span class="font-bold text-slate-800" data-i18n="total_est_price">የተሰላ ዋጋ፡</span>
+                    <span id="recPrice" class="font-extrabold text-amber-600 text-sm">500 ETB</span>
+                </div>
+            </div>
+
+            <!-- Receipt Note -->
+            <p class="text-[11px] text-slate-500 text-center mb-4 leading-relaxed" data-i18n="receipt_note">
+                ቦታ ማስያዝዎ ተረጋግጧል! አሽከርካሪችን በቅርቡ በስልክ ቁጥርዎ ይደውልልዎታል።
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-2">
+                <button onclick="window.print()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
+                    <i class="fa-solid fa-print"></i> <span data-i18n="btn_print">ደራሰኝ አትም</span>
+                </button>
+                <button onclick="closeBookingModal()" class="w-1/2 gold-gradient hover:opacity-95 text-slate-950 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition-all">
+                    <i class="fa-solid fa-circle-check"></i> <span data-i18n="btn_done">ተጠናቀቀ</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION POPUP -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-5 py-3.5 rounded-xl shadow-2xl border border-amber-500/40 hidden flex items-center gap-3 transition-all duration-300">
+        <i class="fa-solid fa-circle-info text-amber-400 text-lg"></i>
+        <span id="toastMsg" class="text-xs font-semibold">መልዕክትዎ በስኬት ተልኳል!</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & I18N -->
+    <script>
+        // Matrix of locations and calculated base fares (ETB)
+        const fareMatrix = {
+            'airport-kebele11': { fare: 500, dist: '11 km', time: '18-22 min' },
+            'kebele11-airport': { fare: 500, dist: '11 km', time: '18-22 min' },
+            'airport-kebele04': { fare: 400, dist: '8 km', time: '12-15 min' },
+            'kebele04-airport': { fare: 400, dist: '8 km', time: '12-15 min' },
+            'airport-abaymado': { fare: 650, dist: '15 km', time: '25-30 min' },
+            'abaymado-airport': { fare: 650, dist: '15 km', time: '25-30 min' },
+            'kebele11-tisabay': { fare: 1500, dist: '32 km', time: '45-50 min' },
+            'tisabay-kebele11': { fare: 1500, dist: '32 km', time: '45-50 min' },
+            'airport-tisabay': { fare: 1800, dist: '38 km', time: '55-60 min' },
+            'tisabay-airport': { fare: 1800, dist: '38 km', time: '55-60 min' },
+            'kebele11-gondar': { fare: 3800, dist: '175 km', time: '2.5-3 hrs' },
+            'gondar-kebele11': { fare: 3800, dist: '175 km', time: '2.5-3 hrs' },
+            'airport-gondar': { fare: 4200, dist: '180 km', time: '3 hrs' },
+            'gondar-airport': { fare: 4200, dist: '180 km', time: '3 hrs' }
+        };
+
+        // Vehicle multipliers
+        const vehMultipliers = {
+            'standard': 1.0,
+            'executive': 1.4,
+            'minivan': 1.8
+        };
+
+        // Language Dictionary
+        let currentLang = 'am';
+        const i18n = {
+            am: {
+                topbar_247: "24/7 ዝግጁ አገልግሎት",
+                topbar_location: "ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ, ባህር ዳር",
+                nav_title: "የባህር ዳር አየር መንገድ ታክሲ ማህበር",
+                nav_subtitle: "Bahir Dar Airport Taxi Association",
+                nav_home: "መነሻ",
+                nav_services: "አገልግሎቶች",
+                nav_pricing: "ታሪፍ/ዋጋ",
+                nav_about: "ስለ እኛ",
+                nav_contact: "እኛን ያግኙን",
+                nav_call_now: "አሁኑኑ ይደውሉ",
+                hero_badge: "የባህር ዳር ህጋዊና አስተማማኝ የታክሲ ማህበር",
+                hero_title: "ለአየር መንገድ እና ለተለያዩ መዳረሻዎች አስተማማኝ የታክሲ አገልግሎት",
+                hero_subtitle: "ከዳግማዊ ምኒልክ አውሮፕላን ማረፊያ ወደ ባህር ዳር ከተማ፣ ሆቴሎች፣ የጣና ገዳማትና የክልሉ ታዋቂ የቱሪስት መዳረሻዎች በሰላምና በምቾት ይጓዙ።",
+                stat_drivers: "የተረጋገጡ አሽከርካሪዎች",
+                stat_support: "የማይቋረጥ አገልግሎት",
+                stat_safety: "ደህንነቱ የተጠበቀ",
+                booking_form_title: "ፈጣን ቦታ ማስያዣ",
+                booking_form_sub: "አሁኑኑ ይዘዙ፣ የታክሲ አሽከርካሪዎን እናዘጋጅ",
+                instant_calc: "ቅጽበታዊ ዋጋ",
+                label_pickup: "መነሻ ቦታ",
+                label_dropoff: "መድረሻ ቦታ",
+                label_date: "ቀን",
+                label_time: "ሰዓት",
+                label_vehicle: "የመኪና ዓይነት",
+                label_phone: "ስልክ ቁጥር",
+                est_fare: "ግምታዊ የጉዞ ታሪፍ፡",
+                btn_confirm_booking: "ቦታ አሁኑኑ ያስይዙ",
+                loc_airport: "ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ",
+                loc_kebele11: "ቀበሌ 11 (ከተማ መሃል)",
+                loc_kebele04: "ቀበሌ 04 / ቀበሌ 13",
+                loc_abaymado: "አባይ ማዶ (ቀበሌ 14)",
+                loc_tisabay: "ጢስ አባይ ዘነበወርቅ",
+                loc_gondar: "ጎንደር ከተማ",
+                veh_standard: "ስታንዳርድ ታክሲ (4 ሰዎችን)",
+                veh_exec: "ኤክስኪዩቲቭ/ኮምፎርት (4 ሰዎችን)",
+                veh_minivan: "ሚኒቫን/ሚኒባስ (Up to 10)",
+                why_title: "ለምን እኛን ይመርጣሉ?",
+                why_sub: "በአውሮፕላን ማረፊያ እና በከተማው አስተማማኝና ሰዓቱን የጠበቀ የትራንስፖርት ዋስትና እንሰጣለን።",
+                why_1_title: "ልምድ ያላቸው አሽከርካሪዎች",
+                why_1_desc: "የሰለጠኑ፣ መንገድ ጠንቅቀው የሚያውቁ እና ተሳፋሪዎችን በስነ-ምግባር የሚያገለግሉ ባለሙያዎች።",
+                why_2_title: "ሰዓት አክባሪነት",
+                why_2_desc: "የበረራ ሰዓትዎን አያመልጡም። አስቀድመን በቦታው ተገኝተን እንጠብቅዎታለን።",
+                why_3_title: "ተመጣጣኝና ግልጽ ዋጋ",
+                why_3_desc: "ያለ አላስፈላጊ ክፍያ በማህበሩ የተወሰነ የተረጋጋና ፍትሃዊ የታሪፍ ተመን።",
+                why_4_title: "ፍጹም ደህንነት",
+                why_4_desc: "በየጊዜው የቴክኒክ ምርመራ የተደረገላቸው ንጹህ እና ምቹ ተሽከርካሪዎች።",
+                dest_tag: "ታዋቂ መዳረሻዎች",
+                dest_title: "በባህር ዳር እና አካባቢዋ ያሉ ዋና የጉዞ መስመሮች",
+                view_all_services: "ሁሉንም አገልግሎቶች ይመልከቱ",
+                tag_popular: "ተመራጭ",
+                serv_1_title: "የአየር መንገድ ትራንስፖርት",
+                serv_1_short: "ከዳግማዊ ምኒልክ አውሮፕላን ማረፊያ ወደ ከተማው ማናቸውም ሆቴሎችና መኖሪያዎች።",
+                btn_book_now: "አሁኑኑ ይዘዙ",
+                serv_2_title: "የጢስ አባይ ፏፏቴ ጉዞ",
+                serv_2_short: "ወደ ታላቁ አባይ ፏፏቴ ለሽርሽርና ለጉብኝት የሚደረጉ ምቹ የታክሲ ጉዞዎች።",
+                serv_3_title: "የረጅም መንገድ (ባህር ዳር - ጎንደር)",
+                serv_3_short: "ከባህር ዳር ወደ ጎንደር፣ ታሪካዊ ቦታዎች እና ጎረቤት ዞኖች የሚደረጉ የግል ጉዞዎች።",
+                services_tag: "የማህበሩ አገልግሎቶች",
+                services_page_title: "የምንሰጣቸው ጥራት ያላቸው የትራንስፖርት አገልግሎቶች",
+                services_page_sub: "ለግል፣ ለቡድን እና ለድርጅቶች ፍላጎት የተዘጋጁ ዘመናዊ የታክሲ አገልግሎት አማራጮቻችን።",
+                serv_badge_247: "24/7 ይገኛል",
+                s1_category: "አየር መንገድ ትራንስፖርት",
+                s1_title: "ከ/ወደ ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ (Bahir Dar Airport Transfer)",
+                s1_desc: "የበረራ ሰዓትዎን በማንኛውም ጊዜ ጠብቀን አውሮፕላን ማረፊያ እናደርሳለን፤ ወይም ከበረራ ሲወርዱ በስምዎ ሰሌዳ ይዘን እንቀበልዎታለን። ለሁሉም የባህር ዳር ሆቴሎችና ሎጆች ምቹ የትራንስፖርት አገልግሎት።",
+                s1_f1: "የበረራ ሰዓት ክትትል",
+                s1_f2: "የእቃ ድጋፍና እንክብካቤ",
+                s1_f3: "ቀጥታ ወደ ሆቴል ማድረስ",
+                s1_f4: "የተወሰነና ፍትሃዊ ዋጋ",
+                btn_book_this: "ይህንን አገልግሎት ያስይዙ",
+                serv_badge_tour: "ቱሪዝም & ጉብኝት",
+                s2_category: "የግልና የቡድን ቱር",
+                s2_title: "የቱሪስት ቦታዎችና የሽርሽር ጉዞዎች (Private & Sightseeing Tours)",
+                s2_desc: "ወደ ጣና ሃይቅ ወደቦች፣ ወደ ጢስ አባይ ፏፏቴ፣ ወደ ጎንደር አዘዞ እንዲሁም በአቅራቢያ ያሉ ታሪካዊና ተፈጥሯዊ ቦታዎች የሚደረጉ የሙሉ ቀን ወይም የግማሽ ቀን የታክሲ አገልግሎቶች።",
+                s2_f1: "ወደ ጣና ወደብ ማድረስ",
+                s2_f2: "ወደ ጢስ አባይ የጉዞ ውል",
+                s2_f3: "የሙሉ ቀን ተጠባባቂ ታክሲ",
+                s2_f4: "ለቡድኖች የሚሆን ሚኒቫን",
+                serv_badge_corp: "ኮርፖሬት",
+                s3_category: "የድርጅት ውል",
+                s3_title: "የኮርፖሬት እና የድርጅቶች ትራንስፖርት (Corporate Services)",
+                s3_desc: "ለንግድ ድርጅቶች፣ ለበጎ አድራጎት ተቋማትና ለመንግስታዊ ያልሆኑ ድርጅቶች (NGOs) ሰራተኞችና እንግዶች የሚሆን የወርሀዊ ወይም የፕሮጀክት ውል የትራንስፖርት ስምምነት።",
+                s3_f1: "በወርሃዊ ደረሰኝ ክፍያ",
+                s3_f2: "ልዩ የደንበኞች ድጋፍ",
+                s3_f3: "የቅድሚያ ቦታ ማስያዝ",
+                s3_f4: "ህጋዊ ደረሰኞችና ውል",
+                btn_contact_corp: "ለድርጅት ውል ያነጋግሩን",
+                pricing_tag: "የታሪፍ ዝርዝር",
+                pricing_title: "ግልጽና ፍትሃዊ የጉዞ ዋጋዎች",
+                pricing_sub: "በማህበሩ የተወሰኑ ይፋዊ የጉዞ ታሪፎችን ይመልከቱ ወይም በካስኩሌተሩ አስልተው ይረዱ።",
+                calc_header: "የቀጥታ ዋጋ ስሌት (Live Distance & Fare Calculator)",
+                calc_est_dist: "ግምታዊ ርቀት:",
+                calc_est_time: "ግምታዊ የጊዜ ርዝማኔ:",
+                total_est_price: "ጠቅላላ የታሪፍ ተመን",
+                btn_book_this_route: "በዚህ ታሪፍ አስይዝ",
+                table_header: "የመደበኛ የጉዞ መስመሮች ዋጋ ሰንጠረዥ",
+                th_route: "የጉዞ መስመር (መነሻ - መድረሻ)",
+                th_distance: "ርቀት",
+                th_std_price: "ስታንዳርድ ታክሲ",
+                th_exec_price: "ኤክስኪዩቲቭ",
+                th_action: "ተግባር",
+                btn_book: "አስይዝ",
+                about_tag: "ስለ ማህበራችን",
+                about_title: "የባህር ዳር አየር መንገድ ታክሲ ማህበር",
+                about_sub: "በባህር ዳር ከተማና በዳግማዊ ምኒልክ አውሮፕላን ማረፊያ የትራንስፖርት ዘርፉን በዘመናዊ መንገድ ለማደራጀትና የነጋዴዎችን፣ የቱሪስቶችንና የህብረተሰቡን እንግልት ለማስቀረት የተቋቋመ ህጋዊ ማህበር።",
+                about_story_title: "የማህበሩ ታሪክና አመሰራረት",
+                about_story_desc: "ማህበራችን በባህር ዳር ከተማ ከጊዜ ወደ ጊዜ እየጨመረ የመጣውን የአየር መንገድ ተጓዦች ፍላጎት መሰረት በማድረግ የተቋቋመ ነው። ከ100 በላይ አባላት አሽከርካሪዎችን በማቀፍ የተደራጀው ማህበራችን ደንበኞችን በሰላም፣ በምቾትና በሰዓት ማድረስን ቀዳሚ ተልዕኮው አድርጎ ይሰራል።",
+                about_vision_title: "ራዕይ እና ተልዕኮ",
+                about_vision_desc: "ራዕያችን፡ በኢትዮጵያ ቀዳሚና በቴክኖሎጂ የተደገፈ ጥራት ያለው የአውሮፕላን ማረፊያ የታክሲ አገልግሎት ሰጪ ማህበር መሆን። ተልዕኮ፡ ተሳፋሪዎችን በታማኝነት፣ በፈጣን ምላሽና በተመጣጣኝ ዋጋ ማገልገል እንዲሁም የባህር ዳርን የቱሪዝም ገጽታ ማሳደግ።",
+                about_safety_badge: "የደህንነት ዋስትና",
+                about_safety_title: "የደህንነትና የጥራት ፖሊሲያችን",
+                about_safety_desc: "ሁሉም አሽከርካሪዎቻችን ከፖሊስ የጸዳ የመልካም ስነ-ምግባር ማስረጃ ያላቸው፣ በመንገድ ደህንነት የሰለጠኑ እና ተሽከርካሪዎቻቸው በየጊዜው የቴክኒክ ምርመራ የሚያልፉ ናቸው።",
+                certified_badge: "100% ህጋዊና የተረጋገጠ",
+                stat_c1: "የተገለገሉ ተሳፋሪዎች",
+                stat_c2: "የተደራጁ ታክሲዎች",
+                stat_c3: "የሰዓት አክባሪነት መጠን",
+                stat_c4: "የስልክና የኦንላይን ድጋፍ",
+                contact_tag: "የመገኛ አድራሻ",
+                contact_title: "እኛን ያግኙን",
+                contact_sub: "ለማንኛውም ጥያቄ፣ አስተያየት ወይም ቅድመ ቦታ ማስያዣ በማንኛውም ጊዜ ይደውሉልን ወይም መልዕክት ይላኩልን።",
+                fast_connect: "በፍጥነት ይገናኙን",
+                contact_call_label: "የ24/7 የስልክ መስመር",
+                contact_telegram: "የቴሌግራም ቻናል / ቦት",
+                contact_whatsapp: "የዋትስአፕ መልዕክት",
+                office_address_title: "የቢሮ አድራሻ",
+                off_loc_1: "ዋና ቢሮ (አውሮፕላን ማረፊያ):",
+                off_loc_1_desc: "ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ ቅጽር ግቢ፣ ባህር ዳር",
+                off_loc_2: "የከተማ ውስጥ ቅርንጫፍ:",
+                off_loc_2_desc: "ቀበሌ 11, ከጊዮን ሆቴል አቅራቢያ, ባህር ዳር",
+                off_email: "ኢሜይል:",
+                contact_form_header: "መልዕክት ይላኩልን",
+                contact_form_sub: "አስተያየት፣ ጥያቄ ወይም የልዩ ጉዞ ጥያቄ ካለዎት ቅጹን ይሙሉ፤ በፍጥነት እንመልሳለን።",
+                c_name: "ሙሉ ስም",
+                c_phone: "ስልክ ቁጥር",
+                c_email: "ኢሜይል (አማራጭ)",
+                c_msg: "መልዕክት",
+                btn_send_msg: "መልዕክት ላክ",
+                map_label: "ዳግማዊ ምኒልክ አውሮፕላን ማረፊያ, ባህር ዳር",
+                footer_about: "በባህር ዳር አውሮፕላን ማረፊያ እና አካባቢዋ ፈጣን፣ ደህንነቱ የተጠበቀ እና ሰዓት አክባሪ የታክሲ አገልግሎት ሰጪ ማህበር።",
+                footer_quick_links: "ፈጣን አገናኞች",
+                footer_services: "አገልግሎቶቻችን",
+                footer_contact: "አድራሻ",
+                modal_receipt_title: "የቦታ ማስያዣ ማረጋገጫ",
+                modal_receipt_sub: "የባህር ዳር አየር መንገድ ታክሲ ማህበር",
+                receipt_code: "የቦታ ማስያዣ ኮድ፡",
+                receipt_note: "ቦታ ማስያዝዎ ተረጋግጧል! አሽከርካሪችን በቅርቡ በስልክ ቁጥርዎ ይደውልልዎታል።",
+                btn_print: "ደራሰኝ አትም",
+                btn_done: "ተጠናቀቀ"
+            },
+            en: {
+                topbar_247: "24/7 Ready Service",
+                topbar_location: "Dagmawi Menelik II Airport, Bahir Dar",
+                nav_title: "Bahir Dar Airport Taxi Association",
+                nav_subtitle: "የባህር ዳር አየር መንገድ ታክሲ ማህበር",
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_pricing: "Pricing/Routes",
+                nav_about: "About Us",
+                nav_contact: "Contact Us",
+                nav_call_now: "Call Now",
+                hero_badge: "Official & Reliable Taxi Association in Bahir Dar",
+                hero_title: "Reliable Taxi Service for Airport & Destination Transfers",
+                hero_subtitle: "Travel safely and comfortably from Dagmawi Menelik II Airport to Bahir Dar hotels, Lake Tana monasteries, and tourist attractions.",
+                stat_drivers: "Verified Drivers",
+                stat_support: "24/7 Continuous",
+                stat_safety: "Guaranteed Safety",
+                booking_form_title: "Quick Taxi Booking",
+                booking_form_sub: "Book now and we'll prepare your driver immediately",
+                instant_calc: "Instant Fare",
+                label_pickup: "Pick-up Location",
+                label_dropoff: "Drop-off Destination",
+                label_date: "Date",
+                label_time: "Time",
+                label_vehicle: "Vehicle Type",
+                label_phone: "Phone Number",
+                est_fare: "Estimated Fare:",
+                btn_confirm_booking: "Confirm Booking Now",
+                loc_airport: "Dagmawi Menelik II Airport",
+                loc_kebele11: "Kebele 11 (City Center)",
+                loc_kebele04: "Kebele 04 / Kebele 13",
+                loc_abaymado: "Abay Mado (Kebele 14)",
+                loc_tisabay: "Tis Abay (Blue Nile Falls)",
+                loc_gondar: "Gondar City",
+                veh_standard: "Standard Taxi (Up to 4)",
+                veh_exec: "Executive / Comfort (Up to 4)",
+                veh_minivan: "Minivan / Minibus (Up to 10)",
+                why_title: "Why Choose Us?",
+                why_sub: "We provide punctual and safe transport services across the airport and city.",
+                why_1_title: "Experienced Drivers",
+                why_1_desc: "Trained professionals with deep local knowledge and courteous customer service.",
+                why_2_title: "Punctuality Guarantee",
+                why_2_desc: "Never miss a flight. We arrive ahead of schedule waiting for you.",
+                why_3_title: "Fair & Fixed Pricing",
+                why_3_desc: "Transparent association tariffs without hidden costs or unexpected surcharges.",
+                why_4_title: "Safety & Quality",
+                why_4_desc: "Clean, comfortable vehicles subjected to regular technical inspections.",
+                dest_tag: "Popular Routes",
+                dest_title: "Top Destinations in Bahir Dar & Surrounding Area",
+                view_all_services: "View All Services",
+                tag_popular: "Popular",
+                serv_1_title: "Airport Transfers",
+                serv_1_short: "Direct transfer from Dagmawi Menelik II Airport to all city hotels and residences.",
+                btn_book_now: "Book Now",
+                serv_2_title: "Tis Abay Falls Excursions",
+                serv_2_short: "Comfortable round-trip taxi travel to the scenic Blue Nile Falls.",
+                serv_3_title: "Long Distance (Bahir Dar - Gondar)",
+                serv_3_short: "Private long-distance rides to Gondar, historic sites, and neighboring regions.",
+                services_tag: "Association Services",
+                services_page_title: "Our Quality Transport Services",
+                services_page_sub: "Modern taxi services tailored for individual travelers, groups, and corporate partners.",
+                serv_badge_247: "Available 24/7",
+                s1_category: "Airport Transport",
+                s1_title: "Dagmawi Menelik II Airport Transfer",
+                s1_desc: "Timely airport pickups and drop-offs. Meet-and-greet service with name signs upon arrival, serving all major Bahir Dar hotels and lodges.",
+                s1_f1: "Flight arrival tracking",
+                s1_f2: "Luggage assistance",
+                s1_f3: "Direct hotel transfer",
+                s1_f4: "Fixed & fair rates",
+                btn_book_this: "Book This Service",
+                serv_badge_tour: "Tourism & Tours",
+                s2_category: "Private & Group Tours",
+                s2_title: "Private Sightseeing & Lake Excursions",
+                s2_desc: "Half-day and full-day taxi charters for Lake Tana boat docks, Tis Abay Falls, and nearby heritage locations.",
+                s2_f1: "Transfers to Lake Tana docks",
+                s2_f2: "Tis Abay excursion packages",
+                s2_f3: "Full-day waiting options",
+                s2_f4: "Group minivans available",
+                serv_badge_corp: "Corporate",
+                s3_category: "Corporate Contracts",
+                s3_title: "Corporate & Institutional Transport",
+                s3_desc: "Monthly or project-based transport agreements for businesses, non-profits, and visiting delegations.",
+                s3_f1: "Monthly invoiced billing",
+                s3_f2: "Dedicated account support",
+                s3_f3: "Priority dispatching",
+                s3_f4: "Official receipts & contracts",
+                btn_contact_corp: "Contact for Corporate Contract",
+                pricing_tag: "Pricing & Routes",
+                pricing_title: "Clear & Fair Fare Structure",
+                pricing_sub: "Explore official fixed tariffs or calculate your trip instant estimate.",
+                calc_header: "Live Distance & Fare Calculator",
+                calc_est_dist: "Est. Distance:",
+                calc_est_time: "Est. Duration:",
+                total_est_price: "Total Estimated Fare",
+                btn_book_this_route: "Book This Route",
+                table_header: "Standard Fare Rate Matrix",
+                th_route: "Route (Origin - Destination)",
+                th_distance: "Distance",
+                th_std_price: "Standard Taxi",
+                th_exec_price: "Executive",
+                th_action: "Action",
+                btn_book: "Book",
+                about_tag: "About Our Association",
+                about_title: "Bahir Dar Airport Taxi Association",
+                about_sub: "An officially licensed taxi association established to modernize airport transportation in Bahir Dar and provide seamless travel.",
+                about_story_title: "Our History & Foundation",
+                about_story_desc: "Established to cater to the growing volume of air travelers at Dagmawi Menelik II Airport, our association brings together over 100 vetted drivers dedicated to safe, punctual, and reliable service.",
+                about_vision_title: "Vision & Mission",
+                about_vision_desc: "Vision: To be Ethiopia's premier technology-enabled airport taxi association. Mission: To deliver reliable, polite, and reasonably priced rides while promoting Bahir Dar's tourism.",
+                about_safety_badge: "Safety Guarantee",
+                about_safety_title: "Safety & Quality Policy",
+                about_safety_desc: "All drivers possess verified police clearance certificates, undergo defensive driving training, and drive routinely inspected vehicles.",
+                certified_badge: "100% Certified & Legal",
+                stat_c1: "Satisfied Passengers",
+                stat_c2: "Registered Taxis",
+                stat_c3: "Punctuality Rate",
+                stat_c4: "Phone & Online Support",
+                contact_tag: "Contact Information",
+                contact_title: "Contact Us",
+                contact_sub: "For inquiries, group reservations, or feedback, feel free to call or drop a message anytime.",
+                fast_connect: "Quick Connect",
+                contact_call_label: "24/7 Phone Hotline",
+                contact_telegram: "Telegram Channel / Bot",
+                contact_whatsapp: "WhatsApp Chat",
+                office_address_title: "Office Address",
+                off_loc_1: "Main Airport Office:",
+                off_loc_1_desc: "Dagmawi Menelik II Airport Terminal, Bahir Dar",
+                off_loc_2: "City Branch Office:",
+                off_loc_2_desc: "Kebele 11, near Ghion Hotel, Bahir Dar",
+                off_email: "Email:",
+                contact_form_header: "Send Us a Message",
+                contact_form_sub: "Have questions or custom route requests? Fill out the form below.",
+                c_name: "Full Name",
+                c_phone: "Phone Number",
+                c_email: "Email (Optional)",
+                c_msg: "Message",
+                btn_send_msg: "Send Message",
+                map_label: "Dagmawi Menelik II Airport, Bahir Dar",
+                footer_about: "Official airport taxi service provider in Bahir Dar, delivering punctual, safe, and fair transportation.",
+                footer_quick_links: "Quick Links",
+                footer_services: "Our Services",
+                footer_contact: "Contact Info",
+                modal_receipt_title: "Booking Confirmation",
+                modal_receipt_sub: "Bahir Dar Airport Taxi Association",
+                receipt_code: "Booking Reference:",
+                receipt_note: "Your booking is confirmed! Our assigned driver will contact you shortly.",
+                btn_print: "Print Receipt",
+                btn_done: "Done"
+            }
+        };
+
+        // Initialize Page Load
+        window.onload = function() {
+            // Set default date to today in booking input
+            const dateInput = document.getElementById('bookDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.value = today;
+            }
+            
+            // Set default time to current time + 30 mins
+            const timeInput = document.getElementById('bookTime');
+            if (timeInput) {
+                const now = new Date();
+                now.setMinutes(now.getMinutes() + 30);
+                const hrs = String(now.getHours()).padStart(2, '0');
+                const mins = String(now.getMinutes()).padStart(2, '0');
+                timeInput.value = `${hrs}:${mins}`;
+            }
+
+            calculateFormFare();
+            calculateInteractiveFare();
+        };
+
+        // Switch Tabs SPA Logic
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.page-tab');
+            tabs.forEach(tab => tab.classList.add('hidden'));
+
+            // Show target tab
+            const target = document.getElementById(`tab-${tabId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update Nav active styles
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('text-amber-400', 'bg-slate-800/80');
+                btn.classList.add('text-slate-300');
+            });
+
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('text-amber-400', 'bg-slate-800/80');
+                activeBtn.classList.remove('text-slate-300');
+            }
+
+            // Scroll top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Language Function
+        function toggleLanguage() {
+            currentLang = currentLang === 'am' ? 'en' : 'am';
+            document.getElementById('currentLangLabel').innerText = currentLang === 'am' ? 'English' : 'አማርኛ';
+
+            // Replace all data-i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang] && i18n[currentLang][key]) {
+                    el.innerText = i18n[currentLang][key];
+                }
+            });
+        }
+
+        // Toggle Mobile Navigation Drawer
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Quick Booking Form Fare Calculation
+        function calculateFormFare() {
+            const pickup = document.getElementById('bookPickup').value;
+            const dropoff = document.getElementById('bookDropoff').value;
+            const veh = document.getElementById('bookVehicle').value;
+
+            let price = 500; // default base
+
+            if (pickup === dropoff) {
+                price = 300;
+            } else {
+                const key = `${pickup}-${dropoff}`;
+                if (fareMatrix[key]) {
+                    price = fareMatrix[key].fare;
+                } else {
+                    price = 600; // default route base
+                }
+            }
+
+            // Multiply vehicle
+            const multiplier = vehMultipliers[veh] || 1.0;
+            const finalFare = Math.round(price * multiplier);
+
+            document.getElementById('calculatedFareText').innerText = `${finalFare.toLocaleString()} ETB`;
+            return finalFare;
+        }
+
+        // Interactive Pricing Tab Calculator
+        function calculateInteractiveFare() {
+            const from = document.getElementById('calcFrom').value;
+            const to = document.getElementById('calcTo').value;
+            const veh = document.getElementById('calcVeh').value;
+
+            let baseFare = 500;
+            let distText = '11 km';
+            let timeText = '18-22 min';
+
+            if (from === to) {
+                baseFare = 300;
+                distText = '3 km';
+                timeText = '5-10 min';
+            } else {
+                const key = `${from}-${to}`;
+                if (fareMatrix[key]) {
+                    baseFare = fareMatrix[key].fare;
+                    distText = fareMatrix[key].dist;
+                    timeText = fareMatrix[key].time;
+                } else {
+                    baseFare = 600;
+                    distText = '12 km';
+                    timeText = '20 min';
+                }
+            }
+
+            const mult = vehMultipliers[veh] || 1.0;
+            const total = Math.round(baseFare * mult);
+
+            document.getElementById('distVal').innerText = distText;
+            document.getElementById('timeVal').innerText = timeText;
+            document.getElementById('calcFareResult').innerText = `${total.toLocaleString()} ETB`;
+        }
+
+        // Apply route from calculator to Quick Booking Form
+        function applyCalcToBooking() {
+            const from = document.getElementById('calcFrom').value;
+            const to = document.getElementById('calcTo').value;
+            const veh = document.getElementById('calcVeh').value;
+
+            document.getElementById('bookPickup').value = from;
+            document.getElementById('bookDropoff').value = to;
+            document.getElementById('bookVehicle').value = veh;
+
+            calculateFormFare();
+            switchTab('home');
+
+            showToast(currentLang === 'am' ? 'የተመረጠው ዋጋ ወደ ቦታ ማስያዣው ገብቷል!' : 'Route applied to booking form!');
+        }
+
+        // Quick Preset Booking from Service cards
+        function quickBookPreset(pickupVal, dropoffVal) {
+            document.getElementById('bookPickup').value = pickupVal;
+            document.getElementById('bookDropoff').value = dropoffVal;
+            calculateFormFare();
+            switchTab('home');
+        }
+
+        // Handle Quick Booking Form Submit
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+
+            const pickupSelect = document.getElementById('bookPickup');
+            const dropoffSelect = document.getElementById('bookDropoff');
+            const pickupText = pickupSelect.options[pickupSelect.selectedIndex].text;
+            const dropoffText = dropoffSelect.options[dropoffSelect.selectedIndex].text;
+            
+            const date = document.getElementById('bookDate').value;
+            const time = document.getElementById('bookTime').value;
+            const phone = document.getElementById('bookPhone').value;
+            
+            const vehSelect = document.getElementById('bookVehicle');
+            const vehText = vehSelect.options[vehSelect.selectedIndex].text;
+
+            const calculatedFare = document.getElementById('calculatedFareText').innerText;
+
+            // Generate Random Receipt Code
+            const randomCode = 'BDTA-' + Math.floor(1000 + Math.random() * 9000);
+
+            // Populate Modal
+            document.getElementById('recCode').innerText = randomCode;
+            document.getElementById('recPickup').innerText = pickupText;
+            document.getElementById('recDropoff').innerText = dropoffText;
+            document.getElementById('recDateTime').innerText = `${date} | ${time}`;
+            document.getElementById('recVehicle').innerText = vehText;
+            document.getElementById('recPhone').innerText = phone;
+            document.getElementById('recPrice').innerText = calculatedFare;
+
+            // Open Modal
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+            showToast(currentLang === 'am' ? 'ቦታ ማስያዣዎ ተመዝግቧል!' : 'Booking recorded successfully!');
+        }
+
+        // Handle Contact Form Submit
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast(currentLang === 'am' ? 'መልዕክትዎ በስኬት ተልኳል! እናመሰግናለን።' : 'Your message has been sent successfully!');
+        }
+
+        // Filter Table Rows
+        function filterRoutesTable() {
+            const input = document.getElementById("routeSearch");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("routesTable");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    let txtValue = td.textContent || td.innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        // Toast Notification Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = message;
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
